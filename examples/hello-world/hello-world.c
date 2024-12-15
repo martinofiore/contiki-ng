@@ -48,13 +48,16 @@ PROCESS_THREAD(hello_world_process, ev, data)
 {
   static struct etimer timer;
 
+  int count;
+
   PROCESS_BEGIN();
 
   /* Setup a periodic timer that expires after 2 seconds. */
   etimer_set(&timer, CLOCK_SECOND * 2);
 
+  count=0;
   while(1) {
-    printf("Hello, world\n");
+    printf("Hello, world. Count is %d\n",count);
 
     /* Wait for the periodic timer to expire and then restart the timer. */
     PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&timer));
